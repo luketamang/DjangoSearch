@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div class="container my-4">
+    <br />
+    <h1>Simple search in djagno</h1>
+    <br />
+    <form action="{% url 'search' %}" method="GET">
+        <input type="text" name="search" placeholder="Search blog" class="form-control">
+    </form>
+    <br />
+    <hr />
+    <div class="row">
+        {% for blogs in bloglist %}
+        <div class="card col-md-3 m-3" style="width: 18rem;">
+            <img src="{{blogs.image.url}}" class="card-img-top w-100" alt="..." style="height: 200px;">
+            <div class="card-body">
+                <h5 class="card-title">{{blogs.title}}</h5>
+                <p class="card-text">{{blogs.content|truncatechars:50}}</p>
+                <a href="#" class="btn btn-secondary btn-sm">Read more..</a>
+            </div>
+        </div>
+        {% endfor %}
+
+
+
+        {% if blog_filter %}
+        {% for blogs in blog_filter %}
+        <div class="card col-md-3 m-3" style="width: 18rem;">
+            <img src="{{blogs.image.url}}" class="card-img-top w-100" alt="..." style="height: 200px;">
+            <div class="card-body">
+                <h5 class="card-title">{{blogs.title}}</h5>
+                <p class="card-text">{{blogs.content|truncatechars:50}}</p>
+                <a href="#" class="btn btn-secondary btn-sm">Read more..</a>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No result found</p>
+        {% endif %}
+
+
+
+    </div>
+</div>
+{% endblock %}
